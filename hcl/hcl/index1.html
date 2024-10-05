@@ -1,0 +1,1109 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+  
+<title>HCL Tower</title>
+
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.29/esri/themes/dark/main.css"
+    />
+    <script src="https://js.arcgis.com/4.29/"></script>
+
+    <style>
+      html,
+      body1,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+
+    </style>
+    <script>
+    const ax = 106.70566333523865
+    const ay = 10.775510841876894 - 0.0185
+    const bx = 106.70528706636662
+    const by = 10.775678206491534 - 0.0185
+    const cx = 106.70528125927933
+    const cy = 10.7758237699513 - 0.0185
+    const dx = 106.70538970015158
+    const dy = 10.775907099017731 - 0.0185
+    const ex = 106.70576732584418
+    const ey = 10.7757404292826 - 0.0185
+
+    const jsondata = {
+        polygons: [
+            {
+                type: "polygon",
+                rings: [
+                    [ax, ay, 0], // A
+                    [bx, by, 0], // B
+                  //  [cx, cy, 0], // C
+                    [dx, dy, 0], // D
+                    [ex, ey, 0], // E
+                    [ax, ay, 0], // A
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [0, 0, 255, 0.9],
+                    outline: {
+                        color: [128, 54, 118],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [ax, ay, 0], // A
+                    [bx, by, 0], // B
+                    [bx, by, 2], // xB
+                    [ax, ay, 2], // xA
+                    [ax, ay, 0], // A
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [0, 0, 0, 0.4],
+                    outline: {
+                        color: [128, 54, 118],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [bx, by, 0], // B
+                   // [cx, cy, 0], // C
+                   // [cx, cy, 2], // xC
+                    [bx, by, 2], // xB
+                    [bx, by, 0], // B
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [0, 0, 0, 0.4],
+                    outline: {
+                        color: [128, 54, 118],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                //    [cx, cy, 0], // C
+                //    [dx, dy, 0], // D
+                //    [dx, dy, 2], // xD
+                 //   [cx, cy, 2], // xC
+                 //   [cx, cy, 0], // C
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [0, 0, 0, 0.4],
+                    outline: {
+                        color: [128, 54, 118],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [dx, dy, 0], // D
+                    [ex, ey, 0], // E
+                    [ex, ey, 2], // xE
+                    [dx, dy, 2], // xD
+                    [dx, dy, 0], // D
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [0, 0, 0, 0.4],
+                    outline: {
+                        color: [128, 54, 118],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [ex, ey, 0], // E
+                    [ax, ay, 0], // A
+                    [ax, ay, 2], // xA
+                    [ex, ey, 2], // xE
+                    [ex, ey, 0], // E
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [0, 0, 0, 0.4],
+                    outline: {
+                        color: [128, 54, 118],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [ax, ay, 2], // A
+                    [bx, by, 2], // B
+                   // [cx, cy, 2], // C
+                    [dx, dy, 2], // D
+                    [ex, ey, 2], // E
+                    [ax, ay, 2], // A
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: 'red',
+                    outline: {
+                        color: [128, 128, 128, 0.4],
+                        width: 1
+                    }
+                }
+            },
+        ]
+    }
+    const ax1 = 106.7056775999027
+    const ay1 = 10.775541355820554 - 0.0185
+    const bx1 = 106.7053942167927
+    const by1 = 10.775667569791048 - 0.0185
+    const cx1 = 106.70540913906292
+    const cy1 = 10.775770588156425 - 0.0185
+    const dx1 = 106.7054710126183
+    const dy1 = 10.775839483601903 - 0.0185
+    const ex1 = 106.7057549389487
+    const ey1 = 10.775714474243925 - 0.0185
+    const jsondata2 = {
+        polygons: [
+            {
+                type: "polygon",
+                rings: [
+                    [ax1, ay1, 40], // A
+                    [bx1, by1, 40], // B
+                    [cx1, cy1, 40], // C
+                    [dx1, dy1, 40], // D
+                    [ex1, ey1, 40], // E
+                    [ax1, ay1, 40], // A
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [0, 0, 255, 0.7],
+                    outline: {
+                        color: [128, 54, 118],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [ax1, ay1, 40], // A
+                    [bx1, by1, 40], // B
+                    [bx1, by1, 42], // xB
+                    [ax1, ay1, 42], // xA
+                    [ax1, ay1, 40], // A
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [80, 80, 80, 0.4],
+                    outline: {
+                        color: [128, 54, 118],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [bx1, by1, 40], // B
+                    [cx1, cy1, 40], // C
+                    [cx1, cy1, 42], // xC
+                    [bx1, by1, 42], // xB
+                    [bx1, by1, 40], // B
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [80, 80, 80, 0.4],
+                    outline: {
+                        color: [128, 54, 118],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [cx1, cy1, 40], // C
+                    [dx1, dy1, 40], // D
+                    [dx1, dy1, 42], // xD
+                    [cx1, cy1, 42], // xC
+                    [cx1, cy1, 40], // C
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [80, 80, 80, 0.4],
+                    outline: {
+                        color: [128, 54, 118],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [dx1, dy1, 40], // D
+                    [ex1, ey1, 40], // E
+                    [ex1, ey1, 42], // xE
+                    [dx1, dy1, 42], // xD
+                    [dx1, dy1, 40], // D
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [80, 80, 80, 0.4],
+                    outline: {
+                        color: [255, 255, 255],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [ex1, ey1, 40], // E
+                    [ax1, ay1, 40], // A
+                    [ax1, ay1, 42], // xA
+                    [ex1, ey1, 42], // xE
+                    [ex1, ey1, 40], // E
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [80, 80, 80, 0.4],
+                    outline: {
+                        color: [255, 255, 255],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [ax1, ay1, 42], // A
+                    [bx1, by1, 42], // B
+                    [cx1, cy1, 42], // C
+                    [dx1, dy1, 42], // D
+                    [ex1, ey1, 42], // E
+                    [ax1, ay1, 42], // A
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: 'green',
+                    outline: {
+                        color: [128, 128, 128, 0.4],
+                        width: 1
+                    }
+                }
+            },
+        ]
+    }
+
+    const ax2 = 106.70569991048951
+    const ay2 = 10.77558771727014 - 0.0185
+    const bx2 = 106.70548350820765
+    const by2 = 10.775683573453941 - 0.0185
+    const cx2 = 106.7054916283734
+    const cy2 = 10.775731888394525 - 0.0185
+    const dx2 = 106.70551920636855
+    const dy2 = 10.775763140138045 - 0.0185
+    const ex2 = 106.70573458939177
+    const ey2 = 10.775666645484403 - 0.0185
+
+    const jsondata3 = {
+        polygons: [
+            {
+                type: "polygon",
+                rings: [
+                    [ax2, ay2, 90], // A
+                    [bx2, by2, 90], // B
+                    [cx2, cy2, 90], // C
+                    [dx2, dy2, 90], // D
+                    [ex2, ey2, 90], // E
+                    [ax2, ay2, 90], // A
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [0, 0, 255, 0.7],
+                    outline: {
+                        color: [0, 0, 255],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [ax2, ay2, 90], // A
+                    [bx2, by2, 90], // B
+                    [bx2, by2, 92], // xB
+                    [ax2, ay2, 92], // xA
+                    [ax2, ay2, 90], // A
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [80, 80, 80, 0.4],
+                    outline: {
+                        color: [128, 54, 118],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [bx2, by2, 90], // B
+                    [cx2, cy2, 90], // C
+                    [cx2, cy2, 92], // xC
+                    [bx2, by2, 92], // xB
+                    [bx2, by2, 90], // B
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [80, 80, 80, 0.4],
+                    outline: {
+                        color: [128, 54, 118],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [cx2, cy2, 90], // C
+                    [dx2, dy2, 90], // D
+                    [dx2, dy2, 92], // xD
+                    [cx2, cy2, 92], // xC
+                    [cx2, cy2, 90], // C
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [80, 80, 80, 0.4],
+                    outline: {
+                        color: [128, 54, 118],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+
+                    [dx2, dy2, 90], // D
+                    [ex2, ey2, 90], // E
+                    [ex2, ey2, 92], // xE
+                    [dx2, dy2, 92], // xD
+                    [dx2, dy2, 90], // D
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [80, 80, 80, 0.4],
+                    outline: {
+                        color: [128, 54, 118],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+
+                    [ex2, ey2, 90], // E
+                    [ax2, ay2, 90], // A
+                    [ax2, ay2, 92], // xA
+                    [ex2, ey2, 92], // xE
+                    [ex2, ey2, 90], // E
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [80, 80, 80, 0.4],
+                    outline: {
+                        color: [128, 54, 118],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [ax2, ay2, 92], // A
+                    [bx2, by2, 92], // B
+                    [cx2, cy2, 92], // C
+                    [dx2, dy2, 92], // D
+                    [ex2, ey2, 92], // E
+                    [ax2, ay2, 92], // A
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: 'green',
+                    outline: {
+                        color: [80, 80, 80, 0.4],
+                        width: 1
+                    }
+                }
+            },
+        ]
+    }
+    const ax3 = 106.70571718236464 + 0.0006
+    const ay3 = 10.775624205124293 - 0.0185
+    const bx3 = 106.70570842019575 + 0.0006
+    const by3 = 10.7756283583043 - 0.0185
+    const cx3 = 106.70571522718978 + 0.0006
+    const cy3 = 10.775639448648139 - 0.0185
+    const dx3 = 106.70572351095096 + 0.0006
+    const dy3 = 10.77563586250457 - 0.0185
+    const jsondata4 = {
+    polygons: [
+            {
+                type: "polygon",
+                rings: [
+                    [ax3, ay3, 65], // A
+                    [bx3, by3, 65], // B
+                    [cx3, cy3, 65], // C
+                    [dx3, dy3, 65], // D
+                    [ax3, ay3, 65], // A
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [0, 190, 0],
+                    outline: {
+                        color: [255, 255, 255],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [ax3, ay3, 65], // A
+                    [bx3, by3, 65], // B
+                    [bx3, by3, 68], // xB
+                    [ax3, ay3, 68], // xA
+                    [ax3, ay3, 65], // A
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [0, 190, 0],
+                    outline: {
+                        color: [255, 255, 255],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [bx3, by3, 65], // B
+                    [cx3, cy3, 65], // C
+                    [cx3, cy3, 68], // xC
+                    [bx3, by3, 68], // xB
+                    [bx3, by3, 65], // B
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [0, 190, 0],
+                    outline: {
+                        color: [255, 255, 255],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [cx3, cy3, 65], // C
+                    [dx3, dy3, 65], // D
+                    [dx3, dy3, 68], // xD
+                    [cx3, cy3, 68], // C
+                    [cx3, cy3, 65], // C
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [0, 190, 0],
+                    outline: {
+                        color: [255, 255, 255],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [dx3, dy3, 65], // D
+                    [ax3, ay3, 65], // A
+                    [ax3, ay3, 68], // A
+                    [dx3, dy3, 68], // D
+                    [dx3, dy3, 65], // D
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [0, 190, 0],
+                    outline: {
+                        color: [255, 255, 255],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [ax3, ay3, 65], // A
+                    [bx3, by3, 65], // B
+                    [cx3, cy3, 65], // C
+                    [dx3, dy3, 65], // D
+                    [ax3, ay3, 65], // A
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: 'red',
+                    outline: {
+                        color: [128, 128, 128, 0.4],
+                        width: 1
+                    }
+                }
+            },
+        ]
+    }
+
+    const ax4 = 106.70571718236464 - 0.0001
+    const ay4 = 10.775624205124293 - 0.0185
+    const bx4 = 106.70570842019575 - 0.0001
+    const by4 = 10.7756283583043 - 0.0185
+    //const bx4 = dx
+    //const by4 = dy
+    const cx4 = 106.70571522718978 - 0.0001
+    const cy4 = 10.775639448648139 - 0.0185
+    const dx4 = 106.70572351095096 - 0.0001
+    const dy4 = 10.77563586250457 - 0.0185
+    const jsondata5 = {
+    polygons: [
+            {
+                type: "extrude",
+                rings: [
+                    [ax4, ay4, 65], // A
+                    [bx4, by4, 65], // B
+                    [cx4, cy4, 65], // C
+                    [dx4, dy4, 65], // D
+                    [ax4, ay4, 65], // A
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    //color: [255, 255, 255, 0.7],
+                    //color: 'black',
+                    color: [0, 190, 0],
+                    outline: {
+                        //color: [153, 255, 255],
+                        color: [255, 255, 255], // White outline
+                        //color: 'black',
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [ax4, ay4, 65], // A
+                    [bx4, by4, 65], // B
+                    [bx4, by4, 68], // xB
+                    [ax4, ay4, 68], // xA
+                    [ax4, ay4, 65], // A
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [0, 190, 0],
+                    //color: 'black',
+                    outline: {
+                        //color: [153, 255, 255],
+                        color: [255, 255, 255],
+                        color: 'black',
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [bx4, by4, 65], // B
+                    [cx4, cy4, 65], // C
+                    [cx4, cy4, 68], // xC
+                    [bx4, by4, 68], // xB
+                    [bx4, by4, 65], // B
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [0, 190, 0],
+                    //color: 'black',
+                    outline: {
+                        //color: [255, 255, 255],
+                        color: [255, 255, 255],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [cx4, cy4, 65], // C
+                    [dx4, dy4, 65], // D
+                    [dx4, dy4, 68], // xD
+                    [cx4, cy4, 68], // C
+                    [cx4, cy4, 65], // C
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    //color: [255, 255, 255, 0.4],
+                    //color: 'black',
+                    color: [0, 190, 0],
+                    outline: {
+                        color: [255, 255, 255],
+                        color: 'black',
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [dx4, dy4,65], // D
+                    [ax4, ay4,65], // A
+                    [ax4, ay4,65], // A
+                    [dx4, dy4,65], // D
+                    [dx4, dy4,65], // D
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    //color: 'red',
+                    color: [0, 190, 0],
+                    outline: {
+                        color: [255, 255, 255],
+                        //color: 'black',
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [ax4, ay4, 68], // A
+                    [bx4, by4, 68], // B
+                    [cx4, cy4, 68], // C
+                    [dx4, dy4, 68], // D
+                    [ax4, ay4, 68], // A
+                ],
+                symbol: {
+                    type: "simple-line",
+                    //color: 'black',
+                    color: [0, 190, 0],
+                    outline: {
+                        color: [255, 255, 255, 0.4],
+                        //color: 'black',
+                        width: 1
+                    }
+                }
+            },
+        ]
+    }
+
+    const bottomLeftx1 = 106.70548509406767
+    const bottomLefty1 = 10.775980158601755 - 0.0185
+    const bottomLeftx2 = dx
+    const bottomLefty2 = dy
+    const bottomLeftx3 = 106.70568382375312
+    const bottomLefty3 = 10.775778688258002 - 0.0185
+
+    const bottomLeft = {
+        polygons: [
+            {
+                type: "polygon",
+                rings: [
+                    [bottomLeftx2, bottomLefty2, 0], // A
+                    [bottomLeftx1, bottomLefty1, 0], // B
+                    [bottomLeftx3, bottomLefty3, 0], // C
+                    [bottomLeftx2, bottomLefty2, 0], // A
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [0, 0, 255, 0.7],
+                    outline: {
+                        color: [255, 255, 255],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [bottomLeftx2, bottomLefty2, 0], // A
+                    [bottomLeftx1, bottomLefty1, 0], // B
+                    [bottomLeftx1, bottomLefty1, 2], // xB
+                    [bottomLeftx2, bottomLefty2, 2], // xA
+                    [bottomLeftx2, bottomLefty2, 0], // A
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [128, 128, 128, 0.4],
+                    outline: {
+                        color: [255, 255, 255],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [bottomLeftx1, bottomLefty1, 0], // B
+                    [bottomLeftx3, bottomLefty3, 0], // C
+                    [bottomLeftx3, bottomLefty3, 2], // xC
+                    [bottomLeftx1, bottomLefty1, 2], // xB
+                    [bottomLeftx1, bottomLefty1, 0], // B
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [128, 128, 128, 0.4],
+                    outline: {
+                        color: [255, 255, 255],
+                        width: 1
+                    }
+                }
+            },
+            {
+                type: "polygon",
+                rings: [
+                    [bottomLeftx3, bottomLefty3, 0], // C
+                    [bottomLeftx2, bottomLefty2, 0], // A
+                    [bottomLeftx2, bottomLefty2, 2], // xA
+                    [bottomLeftx3, bottomLefty3, 2], // xC
+                    [bottomLeftx3, bottomLefty3, 0], // C
+                ],
+                symbol: {
+                    type: "simple-fill",
+                    color: [128, 128, 128, 0.4],
+                    outline: {
+                        color: [255, 255, 255],
+                        width: 1
+                    }
+                }
+            },
+        ]
+    }
+
+    require([
+        "esri/Map",
+        "esri/views/SceneView",
+        "esri/layers/GraphicsLayer",
+        "esri/layers/GeoJSONLayer",
+        // "esri/layers/SceneLayer",
+        // "esri/request",
+		"esri/Graphic",
+    ], function(
+        Map, SceneView, GraphicsLayer, GeoJSONLayer,
+        // SceneLayer,
+        // esriRequest,
+        Graphic
+    ) {
+
+        // Column
+        const geojsonLayer = new GeoJSONLayer({
+            url: "./tru.geojson"
+        });
+        const geojsonLayer1 = new GeoJSONLayer({
+            url: "./tru1.geojson"
+        });
+        const geojsonLayer2 = new GeoJSONLayer({
+            url: "./tru2.geojson"
+        });
+        const geojsonLayer3 = new GeoJSONLayer({
+            url: "./tru3.geojson"
+        });
+        const geojsonLayer4 = new GeoJSONLayer({
+            url: "./tru4.geojson"
+        });
+        const geojsonLayer5 = new GeoJSONLayer({
+            url: "./tru5.geojson"
+        });
+
+        [
+            geojsonLayer,
+            geojsonLayer1,
+            geojsonLayer2,
+            geojsonLayer3,
+            geojsonLayer4,
+            geojsonLayer5,
+        ].forEach(function(layer){
+            layer.renderer = {
+                type: "simple",
+                symbol: {
+                    type: "polygon-3d",
+                    symbolLayers: [
+                        {
+                            type: "extrude",
+                            size: 20,
+                            material: {
+                                color: [255, 255, 255, 1]
+                            },
+                        }
+                    ]
+                }
+            };
+        });
+
+        // Bar
+        const barGeojsonLayer = new GeoJSONLayer({
+            url: "./bar.geojson"
+        });
+
+        barGeojsonLayer.renderer = {
+            type: "simple",
+            symbol: {
+                type: "polygon-3d",
+                symbolLayers: [
+                    {
+                        type: "extrude",
+                        size: 2,
+                        material: {
+                            color: [255, 255, 255, 1]
+                        }
+                    }
+                ]
+            }
+        };
+
+        const topBarGeojsonLayer = new GeoJSONLayer({
+            url: "./topBar.geojson"
+        });
+
+        topBarGeojsonLayer.renderer = {
+            type: "simple",
+            symbol: {
+                type: "polygon-3d",
+                symbolLayers: [
+                    {
+                        type: "extrude",
+                        size: 2,
+                        material: {
+                            color: [255, 255, 255, 1]
+                        }
+                    }
+                ]
+            }
+        };
+
+        // Glass door
+        const glassDoorGeojsonLayer = new GeoJSONLayer({
+            url: "./glassDoor.geojson"
+        });
+
+        glassDoorGeojsonLayer.renderer = {
+            type: "simple",
+            symbol: {
+                type: "polygon-3d",
+                symbolLayers: [
+                    {
+                        type: "extrude",
+                        size: 20,
+                        material: {
+                            color: [135,206,250,0.7]
+                        }
+                    }
+                ]
+            }
+        };
+
+        // office
+        const officeGeojsonLayer = new GeoJSONLayer({
+            url: "./office.geojson"
+        });
+
+        officeGeojsonLayer.renderer = {
+            type: "simple",
+            symbol: {
+                type: "polygon-3d",
+                symbolLayers: [
+                    {
+                        type: "extrude",
+                        size: 2,
+                        material: {
+                            color: [135,206,250,0.8],
+                        },
+                        edges: {
+                            type: "solid",
+                            color: [0, 0, 0, 0.6],
+                        }
+                    }
+                ]
+            }
+        };
+
+        // front window
+        const frontWindowGeojsonLayer = new GeoJSONLayer({
+            url: "./frontWindow.geojson"
+        });
+
+        frontWindowGeojsonLayer.renderer = {
+            type: "simple",
+            symbol: {
+                type: "polygon-3d",
+                symbolLayers: [
+                    {
+                        type: "extrude",
+                        size: 20,
+                        material: {
+                            color: [255, 255, 255, 1]
+                        }
+                    }
+                ]
+            }
+
+        };
+
+        const map = new Map({
+          basemap: "topo-vector",
+          ground: "world-elevation",
+            layers: [
+                geojsonLayer,
+                geojsonLayer1,
+                geojsonLayer2,
+                geojsonLayer3,
+                geojsonLayer4,
+                geojsonLayer5,
+                barGeojsonLayer,
+                topBarGeojsonLayer,
+                glassDoorGeojsonLayer,
+                officeGeojsonLayer,
+                frontWindowGeojsonLayer,
+            ] //end layers
+        });
+
+        const view = new SceneView({
+          container: "viewDiv",
+          map: map,
+          camera: {
+            position: [106.71136192926946, 10.774846802858049 - 0.0185, 300],
+            heading: -80,
+            tilt: 65
+          }
+        });
+        view.popup.defaultPopupTemplateEnabled = true;
+
+        const nameList = [
+            'Time','Past','Future','Dev',
+            'Fly','Flying','Soar','Soaring','Power','Falling',
+            'Fall','Jump','Cliff','Mountain','Rend','Red','Blue',
+            'Green','Yellow','Gold','Demon','Demonic','Panda','Cat',
+            'Kitty','Kitten','Zero','Memory','Trooper','XX','Bandit',
+            'Fear','Light','Glow','Tread','Deep','Deeper','Deepest',
+            'Mine','Your','Worst','Enemy','Hostile','Force','Video',
+            'Game','Donkey','Mule','Colt','Cult','Cultist','Magnum',
+            'Gun','Assault','Recon','Trap','Trapper','Redeem','Code',
+            'Script','Writer','Near','Close','Open','Cube','Circle',
+            'Geo','Genome','Germ','Spaz','Shot','Echo','Beta','Alpha',
+            'Gamma','Omega','Seal','Squid','Money','Cash','Lord','King',
+            'Duke','Rest','Fire','Flame','Morrow','Break','Breaker','Numb',
+            'Ice','Cold','Rotten','Sick','Sickly','Janitor','Camel','Rooster',
+            'Sand','Desert','Dessert','Hurdle','Racer','Eraser','Erase','Big',
+            'Small','Short','Tall','Sith','Bounty','Hunter','Cracked','Broken',
+            'Sad','Happy','Joy','Joyful','Crimson','Destiny','Deceit','Lies',
+            'Lie','Honest','Destined','Bloxxer','Hawk','Eagle','Hawker','Walker',
+            'Zombie','Sarge','Capt','Captain','Punch','One','Two','Uno','Slice',
+            'Slash','Melt','Melted','Melting','Fell','Wolf','Hound',
+            'Legacy','Sharp','Dead','Mew','Chuckle','Bubba','Bubble','Sandwich','Smasher','Extreme','Multi','Universe','Ultimate','Death','Ready','Monkey','Elevator','Wrench','Grease','Head','Theme','Grand','Cool','Kid','Boy','Girl','Vortex','Paradox'
+        ];
+
+        function buildData(jsondata, loop, properties) {
+            const json = []
+
+            const startFloor = properties.startFloor || 0
+
+            for (let i = 0; i < loop; i++) {
+                jsondata.polygons.forEach(function(data){
+                    let newdata = JSON.parse(JSON.stringify(data));
+                    newdata.rings = newdata.rings.map(function(ring){
+                        return [ring[0], ring[1], ring[2] + i * 2];
+                    });
+                    newdata.popupTemplate = {
+                        title: 'Tầng {floor}'.replace('{floor}', startFloor + i),
+                        content: Math.round(Math.random())
+                            ? "Công ty: <b>{name}</b> <br> Giá thuê: $ <b>{price}</b> <br>"
+                                .replace('{name}', nameList[Math.floor( Math.random() * nameList.length )])
+                                .replace('{price}', Math.round(Math.random() * 10) * 1000 + 10000)
+                            : "Tầng trống chưa ai thuê"
+                    }
+                    json.push(newdata);
+                });
+            }
+
+            console.log("=>(index1.html:190) json", json);
+
+            return json;
+        }
+        const dataBuild = buildData(jsondata, 20, {
+            startFloor: -3
+        });
+        const dataBuild2 = buildData(jsondata2, 18, {
+            startFloor: Number(dataBuild[dataBuild.length - 1].popupTemplate.title.replace('Tầng ', '')) + 1
+        });
+        //const dataBuild3 = buildData(jsondata3, 7, {
+        //    startFloor: Number(dataBuild2[dataBuild2.length - 1].popupTemplate.title.replace('Tầng ', '')) + 1
+        //});
+        //const dataBuild4 = buildData(jsondata4, 6, {
+        //    startFloor: Number(dataBuild3[dataBuild2.length - 15].popupTemplate.title.replace('Tầng ', '')) + 1
+        //});
+        const dataBuild5 = buildData(jsondata5, 6, {
+            startFloor: Number(dataBuild2[dataBuild2.length - 15].popupTemplate.title.replace('Tầng ', '')) + 1
+        });
+
+        const bottomLeftData = buildData(bottomLeft, 10, {
+            startFloor: -3
+        })
+		const createGraphic = function (data) {
+			return new Graphic({
+				geometry: data,
+				symbol: data.symbol,
+				attributes: data,
+				popupTemplate: data.popupTemplate
+			});
+		};
+        const graphicsLayer = new GraphicsLayer();
+
+        dataBuild.forEach(function(data){
+          graphicsLayer.add(createGraphic(data));
+        });
+
+        dataBuild2.forEach(function(data){
+            graphicsLayer.add(createGraphic(data));
+        });
+        //<!-- dataBuild3.forEach(function(data){
+        //    graphicsLayer.add(createGraphic(data));
+        //}); -->
+        //dataBuild4.forEach(function(data){
+        //    graphicsLayer.add(createGraphic(data));
+        //});
+        //dataBuild5.forEach(function(data){
+        //    graphicsLayer.add(createGraphic(data));
+        //});
+        //bottomLeftData.forEach(function(data){
+        //    graphicsLayer.add(createGraphic(data));
+        //});
+        
+        map.add(graphicsLayer);
+    });
+    </script>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+</html>
